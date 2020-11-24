@@ -36,6 +36,7 @@ const ScrollableTabView = createReactClass({
 
   propTypes: {
     tabBarPosition: PropTypes.oneOf(['top', 'bottom', 'overlayTop', 'overlayBottom', ]),
+    showContent: PropTypes.bool,
     initialPage: PropTypes.number,
     page: PropTypes.number,
     onChangeTab: PropTypes.func,
@@ -56,6 +57,7 @@ const ScrollableTabView = createReactClass({
   getDefaultProps() {
     return {
       tabBarPosition: 'top',
+      showContent: true,
       initialPage: 0,
       page: -1,
       onChangeTab: () => {},
@@ -398,7 +400,7 @@ const ScrollableTabView = createReactClass({
 
     return <View style={[styles.container, this.props.style, ]} onLayout={this._handleLayout}>
       {this.props.tabBarPosition === 'top' && this.renderTabBar(tabBarProps)}
-      {this.renderScrollableContent()}
+      {this.props.showContent && this.renderScrollableContent()}
       {(this.props.tabBarPosition === 'bottom' || overlayTabs) && this.renderTabBar(tabBarProps)}
     </View>;
   },
